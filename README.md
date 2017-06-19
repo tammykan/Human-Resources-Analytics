@@ -5,9 +5,9 @@
 Human Resources Analytics is an interesting dataset from Kaggle to explore. Our goal is trying to understand why our best and most experienced employees are leaving the company prematurely. We have this database with ten variables and ten thousand observations. Our challege consists in guessing the reasons behind their leaving and to predict which valuable employees will leave next.
 
 ### Goal
-* 1. Understand the data and its variables
-* 2. Perform exploratory analysis by visualizing variables of interest
-* 3. Perform predictive analysis based on variables
+* Understand the data and its variables
+* Perform exploratory analysis by visualizing variables of interest
+* Perform predictive analysis based on variables
 
 This project uses R to analyze the dataset, and combined with Shiny App for information visualization.
 
