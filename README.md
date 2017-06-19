@@ -13,3 +13,4 @@ Human Resources Analytics is an interesting dataset to explore. Our goal is tryi
 ## Data Visualization
 
 ## Shiny App
+[Human Resources Analytics Shiny App]https://tammykanshiny.shinyapps.io/human_resources_analytics/
