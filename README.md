@@ -37,6 +37,11 @@ salary(String) | Relative level of salary (high)
 * The Number of employee who didn't left the company: 11428
 * The proportion of employee who left: 0.24
 
+```
+# read data
+hrdata <- read.csv('HR_comma_sep.csv', header = TRUE)
+```
+
 ## Model Prediction
 Use four different models to predict results, and compare their performance with multiple evaluation methods.
 
@@ -60,4 +65,5 @@ Use Plotly and ggplot packages in R for data visualization, and present the grap
 
 ## Shiny App
 [Human Resources Analytics Shiny App](https://tammykanshiny.shinyapps.io/human_resources_analytics/)
+
 app.R is the code for this shiny app.
