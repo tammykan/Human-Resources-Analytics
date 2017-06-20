@@ -10,6 +10,8 @@ Human Resources Analytics is an interesting dataset from Kaggle to explore. Our 
 * Perform predictive analysis based on variables
 
 This project uses R to analyze the dataset, and combined with Shiny App for information visualization.
+* human_resources_analytics.R is for model prediction and performance evaluation. 
+* app.R is for shiny app.
 
 ## Data Information
 [Data Source: Human Resources Analytics(From Kaggle)](https://www.kaggle.com/ludobenistant/hr-analytics)
@@ -70,19 +72,45 @@ testData  <- hrdata[-trainIndex,]
 * Logistic Regression
 ```
 model_glm <- glm(left ~., data = trainData, family = 'binomial')
+
 # predict output of testing data
 prediction_glm <- predict(model_glm, testData, type = 'response')
 prediction_glm <- ifelse(prediction_glm > 0.5,1,0)
+
 # get confusion matrix
 cm_glm <- table(Truth = testData$left, Pred = prediction_glm)
 table_glm <- getPerformanceTable("Logistic Regression", cm_glm)
+
 # accuracy
 print(paste("Ligistic Regression Accuracy: ", round(mean(prediction_glm == testData$left), digits = 2)))
 ```
 
 * Decision Tree
+```
+model_dt <- rpart(left ~., data = trainData, method="class", minbucket = 25)
+prediction_dt <- predict(model_dt, testData, type = "class")
+cm_dt <- table(Truth = testData$left, Pred = prediction_dt)
+table_dt <- getPerformanceTable("Decision Tree", cm_dt)
+print(paste("Decision Tree Accuracy: ", round(mean(prediction_dt == testData$left), digits = 2)))
+```
+
 * Random Forest
+```
+model_rf <- randomForest(as.factor(left) ~., data = trainData, nsize = 20, ntree = 200)
+prediction_rf <- predict(model_rf, testData)
+cm_rf <- table(Truth = testData$left, Pred = prediction_rf)
+table_rf <- getPerformanceTable("Random Forest", cm_rf)
+print(paste("Random Tree Accuracy: ", round(mean(prediction_rf == testData$left), digits = 2)))
+```
+
 * Support Vector Machine (SVM)
+```R
+model_svm <- svm(left~ ., data = trainData, gamma = 0.25, cost = 10)
+prediction_svm <- predict(model_svm, testData)
+cm_svm <- table(Truth = testData$left, Pred = prediction_svm)
+table_svm <- getPerformanceTable("SVM", cm_svm)
+print(paste("SVM Accuracy: ", round(mean(prediction_svm == testData$left), digits = 2)) )
+```
 
 ### Evaluation Performance
 Model | Sensitivity	| Specificity	| Precision	| Recall	| F1	| AUC
@@ -95,6 +123,7 @@ SVM	| 0.23	| 0.46	| 0.93	| 0.23	| 0.37	| 0.96
 ## Data Visualization
 Use Plotly and ggplot packages in R for data visualization, and present the graphs in shiny app.
 
+![GitHub Logo](/images/plot.png)
 
 ## Shiny App
 [Human Resources Analytics Shiny App](https://tammykanshiny.shinyapps.io/human_resources_analytics/)
