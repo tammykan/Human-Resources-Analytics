@@ -40,13 +40,46 @@ salary(String) | Relative level of salary (high)
 ```
 # read data
 hrdata <- read.csv('HR_comma_sep.csv', header = TRUE)
+
+# summary of the data
+head(hrdata)
+summary(hrdata)
+# check numbers of missing values
+sum(is.na(hrdata))
+```
+
+```
+# transform the factor variables into numeric data
+levels(hrdata$salary) <- c("low", "medium", "high")
+hrdata$salary <- as.numeric(hrdata$salary)
+hrdata$left = as.factor(hrdata$left)
 ```
 
 ## Model Prediction
 Use four different models to predict results, and compare their performance with multiple evaluation methods.
 
 ### Model
+
+```
+# split data into training and testing data
+trainIndex <- createDataPartition(hrdata$left, p = 0.7, list = FALSE, times = 1)
+trainData <- hrdata[trainIndex,]
+testData  <- hrdata[-trainIndex,]
+```
+
 * Logistic Regression
+```
+model_glm <- glm(left ~., data = trainData, family = 'binomial')
+# predict output of testing data
+prediction_glm <- predict(model_glm, testData, type = 'response')
+prediction_glm <- ifelse(prediction_glm > 0.5,1,0)
+# get confusion matrix
+cm_glm <- table(Truth = testData$left, Pred = prediction_glm)
+table_glm <- getPerformanceTable("Logistic Regression", cm_glm)
+# accuracy
+print(paste("Ligistic Regression Accuracy: ", round(mean(prediction_glm == testData$left), digits = 2)))
+```
+
 * Decision Tree
 * Random Forest
 * Support Vector Machine (SVM)
