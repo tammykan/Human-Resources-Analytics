@@ -39,7 +39,7 @@ salary(String) | Relative level of salary (high)
 * The Number of employee who didn't left the company: 11428
 * The proportion of employee who left: 0.24
 
-```
+```R
 # read data
 hrdata <- read.csv('HR_comma_sep.csv', header = TRUE)
 
@@ -50,7 +50,7 @@ summary(hrdata)
 sum(is.na(hrdata))
 ```
 
-```
+```R
 # transform the factor variables into numeric data
 levels(hrdata$salary) <- c("low", "medium", "high")
 hrdata$salary <- as.numeric(hrdata$salary)
@@ -62,7 +62,7 @@ Use four different models to predict results, and compare their performance with
 
 ### Model
 
-```
+```R
 # split data into training and testing data
 trainIndex <- createDataPartition(hrdata$left, p = 0.7, list = FALSE, times = 1)
 trainData <- hrdata[trainIndex,]
@@ -70,7 +70,7 @@ testData  <- hrdata[-trainIndex,]
 ```
 
 * Logistic Regression
-```
+```R
 model_glm <- glm(left ~., data = trainData, family = 'binomial')
 
 # predict output of testing data
@@ -86,7 +86,7 @@ print(paste("Ligistic Regression Accuracy: ", round(mean(prediction_glm == testD
 ```
 
 * Decision Tree
-```
+```R
 model_dt <- rpart(left ~., data = trainData, method="class", minbucket = 25)
 prediction_dt <- predict(model_dt, testData, type = "class")
 cm_dt <- table(Truth = testData$left, Pred = prediction_dt)
@@ -95,7 +95,7 @@ print(paste("Decision Tree Accuracy: ", round(mean(prediction_dt == testData$lef
 ```
 
 * Random Forest
-```
+```R
 model_rf <- randomForest(as.factor(left) ~., data = trainData, nsize = 20, ntree = 200)
 prediction_rf <- predict(model_rf, testData)
 cm_rf <- table(Truth = testData$left, Pred = prediction_rf)
@@ -123,7 +123,7 @@ SVM	| 0.23	| 0.46	| 0.93	| 0.23	| 0.37	| 0.96
 ## Data Visualization
 Use Plotly and ggplot packages in R for data visualization, and present the graphs in shiny app.
 
-![GitHub Logo](/images/plot.png)
+![satisfication_level](/images/satisfication_level.png)
 
 ## Shiny App
 [Human Resources Analytics Shiny App](https://tammykanshiny.shinyapps.io/human_resources_analytics/)
