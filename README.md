@@ -15,6 +15,7 @@ This project uses R to analyze the dataset, and combined with Shiny App for info
 [Data Source: Human Resources Analytics(From Kaggle)](https://www.kaggle.com/ludobenistant/hr-analytics)
 
 This dataset contains 10 variables and 15K rows. Each row corresponds to an employee.
+
 Below are the descriptions about these variables:
 
 Variable Name | Description
@@ -31,10 +32,32 @@ sales(String) | Department in which they work for
 salary(String) | Relative level of salary (high)
 
 ## Data Analysis
+* The Total Number of employee: 14999
+* The Number of employee who left the company: 3571
+* The Number of employee who didn't left the company: 11428
+* The proportion of employee who left: 0.24
 
 ## Model Prediction
+Use four different models to predict results, and compare their performance with multiple evaluation methods.
+
+### Model
+* Logistic Regression
+* Decision Tree
+* Random Forest
+* Support Vector Machine (SVM)
+
+### Evaluation Performance
+Model | Sensitivity	| Specificity	| Precision	| Recall	| F1	| AUC
+------------ | ------------- | ------------- | ------------- | ------------- | ------------- | -------------
+Logistic Regression	| 0.10	| 0.74	| 0.61	| 0.10	| 0.17	| 0.82
+Decision Tree	| 0.23	| 0.58	| 0.94	| 0.23	| 0.37	| 0.97
+Random Forest	| 0.23	| 0.77	| 0.99	| 0.23	| 0.37	| 0.99
+SVM	| 0.23	| 0.46	| 0.93	| 0.23	| 0.37	| 0.96
 
 ## Data Visualization
+Use Plotly and ggplot packages in R for data visualization, and present the graphs in shiny app.
+
 
 ## Shiny App
 [Human Resources Analytics Shiny App](https://tammykanshiny.shinyapps.io/human_resources_analytics/)
+app.R is the code for this shiny app.
